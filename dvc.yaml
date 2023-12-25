@@ -4,9 +4,7 @@ stages:
     deps:
     - .\data\raw\train.csv
     - .\src\data\make_dataset.py
-    params:
-    - build_features.test_split
-    - build_features.seed
+  
     outs:
     - .\data\interim\
   build_features:

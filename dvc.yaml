@@ -4,7 +4,9 @@ stages:
     deps:
     - .\data\raw\train.csv
     - .\src\data\make_dataset.py
-  
+    params:
+    - build_features.test_split
+    - build_features.seed
     outs:
     - .\data\interim\
   build_features:
@@ -12,14 +14,23 @@ stages:
     deps:
     - .\data\interim\processed.csv
     - .\src\features\build_features.py
+    params:
+    - build_features.test_split
+    - build_features.seed
+
     outs:
-    - .\data\processed\
+    - .\data\processed\interim
 
   train_model:
     cmd: python .\src\models\train_model.py .\data\processed\
     deps:
     - .\data\processed\
     - .\src\models\train_model.py
+    params:
+    - train_model.n_estimators
+    - train_model.max_depth
+    - train_model.seed
+
     outs:
     - .\models\
   visualize:
